@@ -31,7 +31,8 @@ RUN echo "PORT=5051" > /etc/default/mesos-slave
 EXPOSE 5051
 
 # Default run command arguments
-CMD ["bash", "-c", "/usr/bin/mesos-init-wrapper slave --hostname $MESOS_HOSTNAME --master $MESOS_MASTER"]
+#CMD ["bash", "-c", "/usr/bin/mesos-init-wrapper slave --hostname $MESOS_HOSTNAME --master $MESOS_MASTER"]
+CMD ["bash", "-c", "echo \"$MESOS_PASSWD\" >> /etc/passwd && /usr/bin/mesos-init-wrapper slave --master $MESOS_MASTER"]
 
 USER root
 
