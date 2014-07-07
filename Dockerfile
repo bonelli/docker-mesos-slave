@@ -41,14 +41,14 @@ RUN tar xvf /tmp/sparkR-master.tgz -C /tmp
 RUN mv /tmp/bonelli-SparkR-pkg* /tmp/SparkR-pkg
 RUN cd /tmp/SparkR-pkg && LD_LIBRARY_PATH="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server" ./install-dev.sh
 
+ENV LD_LIBRARY_PATH /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server
 #RUN rm -fR /tmp/sparkR-master.tgz
 
 
 EXPOSE 5051
 
 # Default run command arguments
-#CMD ["bash", "-c", "/usr/bin/mesos-init-wrapper slave --hostname $MESOS_HOSTNAME --master $MESOS_MASTER"]
-CMD ["bash", "-c", "echo \"$MESOS_PASSWD\" >> /etc/passwd && /usr/bin/mesos-init-wrapper slave --master $MESOS_MASTER"]
+CMD echo "$MESOS_PASSWD" >> /etc/passwd && /usr/bin/mesos-init-wrapper slave --master "$MESOS_MASTER"
 
 USER root
 
